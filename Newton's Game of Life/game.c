@@ -22,4 +22,6 @@ int** new_state(int** state) {
 // Implement the logic
 int main() {
   ;
+
+  printf("hi\n");
 }
