@@ -30,6 +30,6 @@ ceebs for now :stuck_out_tongue:
 
 ### Project One
 
-Project 1 is the first project :open_mouth:
+
 
 <br/>
