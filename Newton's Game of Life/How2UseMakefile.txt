@@ -1,0 +1,11 @@
+To update the Makefile to include your new .c or .h files
+=============================================================
+place header files in 'include'
+dw about OBJS
+place .c files in 'src'
+Open the makefile
+- Add the  new header file name on _DEPS {_DEPS = matrix.h example.h}
+- Edit _OBJS to include your file name {_OBJS = matrix.o example.o}
+Save and exit
+
+Now type 'make' in the folder containing the makefile
