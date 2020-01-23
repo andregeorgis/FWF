@@ -8,4 +8,4 @@ Open the makefile
 - Edit _OBJS to include your file name {_OBJS = matrix.o example.o}
 Save and exit
 
-Now type 'make' in the folder containing the makefile
+Now type 'make' on your compiler (with directory in the folder containing the makefile )
