@@ -5,16 +5,24 @@ typedef struct complex {
   double imaginary;
 } complex;
 
-double max_length = 50;
-int max_iterations = 9;
-int intervals = 10;
-int size = 51; // of grid
-double scale_real = 0.8;
-double scale_imaginary = 0.5;
+double max_length = 50000000;
+int max_iterations = 20;
+int size = 401; // of grid
+double scale_real = 0.05;
+double scale_imaginary = 0.05;
+char* data_filename = "data.txt";
 
-int main() {
+int main(int argc, char *argv[]) {
+  FILE* data = fopen(data_filename, "w");
+
+  if (data == NULL) {
+    printf("Error\n");
+    return 1;
+  }
+
+  fprintf(data, "%d %d\n", size, max_iterations);
+
   complex grid[size][size];
-  int colour_grid[size][size];
 
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
@@ -34,14 +42,11 @@ int main() {
         }
       }
 
-      colour_grid[i][j] = iteration; // < max_iterations ? intervals * iteration / max_iterations : intervals - 1;
-
-      if (i == (size - 1) / 2 && j == (size - 1) / 2) {
-        printf("C");
-      } else {
-        printf("%d", colour_grid[i][j]);
-      }
+      fprintf(data, "%d ", iteration);
     }
-    printf("\n");
+    fprintf(data, "\n");
   }
+
+  fclose(data);
+  return 0;
 }
