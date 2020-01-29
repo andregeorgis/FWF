@@ -18,7 +18,7 @@ int** setup(int size) {
 
   for (i = 0; i < size; i++){
     for (j = 0; j < size; j++){
-      array[i][j] = 8;
+      array[i][j] = 0;
     }
   }
 
