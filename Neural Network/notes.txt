@@ -1,0 +1,79 @@
+Recognise digits in a 28x28 grid
+
+Neuron --> a function
+Learning --> Finding the right weight and bias
+
+Holds the grey scale value for a number (Activation) {Lit = 1}
+Activations in one layer --> activate another layer
+
+Digits = Broken down into its components
+Recognising a loop = recognising all the little edges
+
+Assign weights for each Neuron
+Take the weighted sum of the first layer
+Have some negative weighted near the edges
+
+Wieghted sum --> Sigmoid Equation into next layer
+You want some bias (add -10 into the signnoid sum)
+  Recitfied Linear Unit
+  ReLU(a) = max(0,a)
+
+In articles will be a matrix
+next node = (sigmoid function([weighted matrix][each neuron]+[bias]))
+
+Want to do this with every dial
+
+Neural Network function
+Input: 784 numbers (pixels)
+output: 10 numbers
+Parameters: 13002 weights/biases
+
+
+Cost function
+Sum of [(Error - Actual)^2 {for each pixel}]
+Small when correct, large when incorrect
+
+Input: 13,002 weights/biases
+Output: 1 number (the cost)
+Parameters: many training examples
+
+Goal is try to make the error as small as possible
+Average cost = average of all the sums
+
+2D (one input 1 output)
+Figure out slope. Shift left if positive, shit right if negative
+Make it proportional to the slope
+--> Will gradually approach a local minimum
+
+3D (2 input 1 output)
+Gradient of the function --> shows direction of steepest increase
+Compute Gradient
+Take a small step in -Gradient
+Repeat over and over
+
+17002D
+Organise all weights and biases into a coloumn vector
+The negative gradient of the coloumn vector is a vector
+Add to nudge to the rapid decrease
+Minimises the cost function
+
+Calculating the Gradient
+Changes in the gradient are weights
+The larger the weight the less you have to change for the neuron to change
+Need to propagate backwards
+ --> Use recursion
+
+ Example for a neuron specified for 2:
+Want the last layer neuron to only light up 2
+Therefore a low cost function
+Need to alter the weights and biases
+(increase b, increase weights (in proportion to a), increase a(in proportional to w))
+We need to do this for other neurons to become less active as well
+We add all these desired effects (basically the nudges you want) to the beginning
+Now do it for all the training data
+Average all the changes for al the training data and you get the gradients
+Split up the training data into subsets
+Then find average
+
+
+Calculus?
