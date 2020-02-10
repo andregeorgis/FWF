@@ -1,3 +1,9 @@
+#include <stdio.h>
+#include <string.h>
+#include "bitmap.h"
+int main(int argc, char **argv){
+
+  
 // Using the AI
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 // Conversion of bitmap into pixels
@@ -25,10 +31,6 @@
 // Goal is to reduce the number given by averaging the cost of many tests
 
 //Back Propogation
-
-
-
-
 // Determine the negative gradient (cost function)
 // x = weight * prevneuron + biases
 // neuron = signoid(x)
@@ -52,3 +54,6 @@
 // Do it for many tests (a subset)
 // Average all result and you will get the cost function (all the nudges to subtract)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+  return 0;
+}
