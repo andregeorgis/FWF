@@ -6,8 +6,8 @@ TARGET=main
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
-_DEPS = 
-_OBJS = main.o
+_DEPS = network.h functions.h
+_OBJS = main.o network.o functions.o
 
 DEPS = $(patsubst %,$(INC_DIR)/%,$(_DEPS))
 OBJS = $(patsubst %,$(OBJ_DIR)/%,$(_OBJS))
