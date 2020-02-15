@@ -17,3 +17,5 @@ Neuron*create_individual_neuron(int pos, int next_layer);
 Neuron_Array*create_memory(const int num_neurons);
 Neuron_Array* create_neuron_array(Neuron_Array*array, int input_neurons, int hidden_neurons, int output_neurons);
 Neuron_Array* add_to_neuron_array(Neuron_Array*array, Neuron*neuron);
+Neuron_Array* calculate_activation(Neuron_Array*array, int input, int hidden, int output);
+double sigmoid(double x);

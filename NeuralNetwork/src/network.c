@@ -54,13 +54,34 @@ Neuron_Array* add_to_neuron_array(Neuron_Array*array, Neuron*neuron){
 	return NULL;
 }
 
-//Calculate the activation of the hidden  and output Layer
+//Calculate the activation of the hidden and output Layer
+Neuron_Array* calculate_activation(Neuron_Array*array, int input, int hidden, int output){
+  double answer = 0, count = 0;
 
+  for (int i = 0; i < hidden; i++){
+    for (int j = 0; j < input; j++){
+      answer = array->list_of_neurons[j]->list_of_weights[i]*array->list_of_neurons[j]->activation;
+      count = count + answer;
+    }
+    // printf("count = %f\n", count);
+    // printf("bias = %f\n", array->list_of_neurons[input+i]->bias);
+    array->list_of_neurons[input+i]->activation = sigmoid(count+array->list_of_neurons[input+i]->bias);
+  }
 
-
+  for (int i = 0; i < output; i++){
+    for (int j = 0; j < input; j++){
+      answer = array->list_of_neurons[j]->list_of_weights[i]*array->list_of_neurons[j]->activation;
+      count = count + answer;
+      //printf("count = %f\n", count);
+    }
+    array->list_of_neurons[input+hidden+i]->activation = sigmoid(count+array->list_of_neurons[input+hidden+i]->bias);
+  }
+  // printf("%d\n", input + hidden);
+  return array;
+}
 
 // Signoid Function
-double sigmoid(float x){
+double sigmoid(double x){
      double exp_value;
      double return_value;
      /*** Exponential calculation ***/
