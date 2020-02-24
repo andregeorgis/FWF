@@ -141,8 +141,8 @@ double *new_weight_hidden(Neuron_Array*array){
 	//
 	double *weights;
 	// w = all the weights added togetehr into one number per neuron
-	for
-	array->list_of_neurons[]->list_of_weights
+	// for
+	// array->list_of_neurons[]->list_of_weights
 
 }
 
