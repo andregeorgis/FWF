@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
+#include "bitmap.h"
 #include "network.h"
 #include "functions.h"
 
@@ -15,9 +15,9 @@ Neuron_Array* create_memory(const int num_neurons){
 }
 
 // Access the neuron struct to allocate indiivudal weights and biases
-Neuron*create_individual_neuron(int pos, int next_layer){
+Neuron*create_individual_neuron(int pos, int prev_layer){
   Neuron*neuron = malloc(sizeof(Neuron));
-  for (int i = 0; i < next_layer; i++){
+  for (int i = 0; i < prev_layer; i++){
     neuron->list_of_weights[i] = gaussrand();
   }
   neuron->pos = pos;
@@ -28,19 +28,19 @@ Neuron*create_individual_neuron(int pos, int next_layer){
 Neuron_Array* create_neuron_array(Neuron_Array*array, int input_neurons, int hidden_neurons, int output_neurons){
 
   for (int i = 0; i < input_neurons; i++){
-    Neuron*neuron = create_individual_neuron(i, hidden_neurons);
+    Neuron*neuron = create_individual_neuron(i, 0);
     neuron->bias = 0;
     add_to_neuron_array(array, neuron);
   }
 
   for (int i = 0; i < hidden_neurons; i++){
-    Neuron*neuron = create_individual_neuron(i, output_neurons);
+    Neuron*neuron = create_individual_neuron(i, input_neurons);
     neuron->bias = gaussrand();
     add_to_neuron_array(array, neuron);
   }
 
   for (int i = 0; i < output_neurons; i++){
-    Neuron*neuron = create_individual_neuron(i, output_neurons);
+    Neuron*neuron = create_individual_neuron(i, hidden_neurons);
     neuron->bias = gaussrand();
     add_to_neuron_array(array, neuron);
   }
@@ -58,9 +58,12 @@ Neuron_Array* add_to_neuron_array(Neuron_Array*array, Neuron*neuron){
 Neuron_Array* calculate_activation(Neuron_Array*array, int input, int hidden, int output){
   double answer = 0, count = 0;
 
+	// Going through all the neurons of the hidden layer
   for (int i = 0; i < hidden; i++){
+
+		// Going through all the weights of the neurons in the hidden layer
     for (int j = 0; j < input; j++){
-      answer = array->list_of_neurons[j]->list_of_weights[i]*array->list_of_neurons[j]->activation;
+      answer = array->list_of_neurons[input+i]->list_of_weights[j]*array->list_of_neurons[j]->activation;
       count = count + answer;
     }
     // printf("count = %f\n", count);
@@ -68,16 +71,79 @@ Neuron_Array* calculate_activation(Neuron_Array*array, int input, int hidden, in
     array->list_of_neurons[input+i]->activation = sigmoid(count+array->list_of_neurons[input+i]->bias);
   }
 
+	count = 0;
+
+	// Going through all the neurons of the output layer
   for (int i = 0; i < output; i++){
-    for (int j = 0; j < input; j++){
-      answer = array->list_of_neurons[j]->list_of_weights[i]*array->list_of_neurons[j]->activation;
+		// Going through all the weights of the neurons in the output layer
+    for (int j = 0; j < hidden; j++){
+      answer = array->list_of_neurons[input+hidden+i]->list_of_weights[j]*array->list_of_neurons[input+j]->activation;
       count = count + answer;
-      //printf("count = %f\n", count);
+			// printf("count = %f\n", count);
     }
+
     array->list_of_neurons[input+hidden+i]->activation = sigmoid(count+array->list_of_neurons[input+hidden+i]->bias);
   }
   // printf("%d\n", input + hidden);
   return array;
+}
+
+// Return array containing the gradient of the cost function
+double*error_function(Neuron_Array*neuron_array, double*y, int input, int hidden, int output){
+
+	// Calcualting the cost function
+	double *cost;
+	cost = (double*)malloc(output*sizeof(double));
+	int j = 0;
+
+	for (int i = 0; i < output; i++){
+		cost[j] = neuron_array->list_of_neurons[input+hidden+i]->activation - y[j];
+		// printf("cost[%d] = %f\n", i, cost[j]);
+		j++;
+	}
+
+	// Calculating the sigmoid prime
+	double *sigmoidprime, count = 0, answer;
+	sigmoidprime = (double*)malloc(output*sizeof(double));
+	// Going through all the neurons of the output layer
+	for (int i = 0; i < output; i++){
+		// Going through all the weights of the neurons in the output layer
+		for (int j = 0; j < hidden; j++){
+			answer = neuron_array->list_of_neurons[input+hidden+i]->list_of_weights[j]*neuron_array->list_of_neurons[input+j]->activation;
+			count = count + answer;
+			// printf("count = %f\n", count);
+		}
+
+		sigmoidprime[i] = deriv_sigmoid(count+neuron_array->list_of_neurons[input+hidden+i]->bias);
+	}
+
+	double *error = malloc(output*sizeof(double));
+	for (int i = 0; i < output; i++){
+		error[i] = cost[i]*sigmoidprime[i];
+		// printf("sigmoidprime vector[%d] = %f\n", i, sigmoidprime[i]);
+		// printf("cost function vector[%d] = %f\n", i, cost[i]);
+		printf("error vector[%d] = %f\n", i, error[i]);
+	}
+
+	return error;
+}
+
+double *back_prop(){
+
+	double *updated_weight_list = malloc(array->total_weights*sizeof(double));
+	updated_weight_list = new_weight_hidden();
+
+}
+
+double *new_weight_hidden(Neuron_Array*array){
+	// Calculating layer = 2 (hidden)
+	// Using output weights  (l + 1)
+	//
+	double *weights;
+	// w = all the weights added togetehr into one number per neuron
+	for
+	array->list_of_neurons[]->list_of_weights
+
 }
 
 // Signoid Function
@@ -89,4 +155,10 @@ double sigmoid(double x){
      /*** Final sigmoid value ***/
      return_value = 1 / (1 + exp_value);
      return return_value;
+}
+
+double deriv_sigmoid(double x){
+	double ans;
+	ans = sigmoid(x)*(1-sigmoid(x));
+	return ans;
 }
