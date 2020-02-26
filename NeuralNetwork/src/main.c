@@ -10,7 +10,7 @@ int main(int argc, char **argv){
   int num_layers, input_neurons, hidden_neurons, output_neurons, total;
 
   num_layers = 3;
-  input_neurons = 3;
+  input_neurons = 1;
   hidden_neurons = 2;
   output_neurons = 2;
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv){
   //Add random activatiosnf ro input layer for now===========================
   neuron_array->list_of_neurons[0]->activation = 0;
   neuron_array->list_of_neurons[1]->activation = 0;
-  neuron_array->list_of_neurons[2]->activation = 1;
+  // neuron_array->list_of_neurons[2]->activation = 1;
 
   double y[output_neurons*sizeof(double)];
   y[0] = 1;
@@ -30,10 +30,10 @@ int main(int argc, char **argv){
 
   calculate_activation(neuron_array, input_neurons, hidden_neurons, output_neurons);
 
-  double *error = malloc(output_neurons*sizeof(double));
-  error = error_function(neuron_array, y, input_neurons, hidden_neurons, output_neurons);
+  double *error_output = malloc(output_neurons*sizeof(double));
+  error_output = error_function(neuron_array, y, input_neurons, hidden_neurons, output_neurons);
+  back_prop(neuron_array, error_output, input_neurons, hidden_neurons, output_neurons);
 
-  
   //Debugging
   for (int i = 0; i < total; i++){
     if (i >= 0 && i < input_neurons){
@@ -69,6 +69,8 @@ int main(int argc, char **argv){
   //     a++;
   //   }
   // }
+
+
 
 
 

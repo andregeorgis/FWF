@@ -20,5 +20,6 @@ Neuron_Array* create_neuron_array(Neuron_Array*array, int input_neurons, int hid
 Neuron_Array* add_to_neuron_array(Neuron_Array*array, Neuron*neuron);
 Neuron_Array* calculate_activation(Neuron_Array*array, int input, int hidden, int output);
 double*error_function(Neuron_Array*neuron_array, double*y, int input, int hidden, int output);
+double *back_prop(Neuron_Array*array, double*error_output, int input, int hidden, int output);
 double sigmoid(double x);
 double deriv_sigmoid(double x);

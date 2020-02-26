@@ -4,6 +4,7 @@
 #include "bitmap.h"
 #include "network.h"
 #include "functions.h"
+#include "lar.h"
 
 //ALlocate memory to hold an array of neurons structs
 Neuron_Array* create_memory(const int num_neurons){
@@ -64,6 +65,8 @@ Neuron_Array* calculate_activation(Neuron_Array*array, int input, int hidden, in
 		// Going through all the weights of the neurons in the hidden layer
     for (int j = 0; j < input; j++){
       answer = array->list_of_neurons[input+i]->list_of_weights[j]*array->list_of_neurons[j]->activation;
+			// printf("neuron weight = %f\n", array->list_of_neurons[input+i]->list_of_weights[j]);
+			// printf("neuron activation = %f\n", array->list_of_neurons[j]->activation);
       count = count + answer;
     }
     // printf("count = %f\n", count);
@@ -128,21 +131,42 @@ double*error_function(Neuron_Array*neuron_array, double*y, int input, int hidden
 	return error;
 }
 
-double *back_prop(){
+// This function returns Error (hidden) OR Error (input)
+double *back_prop(Neuron_Array*array, double*error_output, int input, int hidden, int output){
+	// Layer position
+	int input_layer_pos = 1;
+	int hidden_layer_pos = 2;
+	int output_layer_pos = 3;
+	int k = 0;
 
-	double *updated_weight_list = malloc(array->total_weights*sizeof(double));
-	updated_weight_list = new_weight_hidden();
+	// Initialise an array to capture the updated weights
+	double *weight_part = malloc(hidden*output*sizeof(double));
 
-}
+	//Calculating Weight_Part(L-1) = = weight(L) x error(L) (matrix multiplication)
 
-double *new_weight_hidden(Neuron_Array*array){
-	// Calculating layer = 2 (hidden)
-	// Using output weights  (l + 1)
-	//
-	double *weights;
-	// w = all the weights added togetehr into one number per neuron
-	// for
-	// array->list_of_neurons[]->list_of_weights
+
+	//Grab the weight list of the final Layer
+	//Go through the number of neurons in the final layer
+	for (int i = 0; i < output; i++){
+		//Since the list of weights is based on the number of neurons in the previous layer
+		for (int j = 0; j < hidden; j++){
+			weight_part[k]= array->list_of_neurons[input+hidden+i]->list_of_weights[j];
+			k++;
+		}
+	}
+
+
+
+	// for (int i = 0; i < output*hidden; i++){
+	// 	printf("weights = %f\n", weight_part[i]);
+	// }
+	//Calcualte the error list for the final layer
+
+	//Calculating Error(L-1) = Weight_Part(l-1) . sigmoid prime(z(L-1))
+
+	//Calculating Weight_Part(L-2) = weight(L-1) x error(L-1) (matrix multiplication)
+
+	//Calculating Error(L-2) = Weight_Part(L-2) . sigmoid prime(z(L-2))
 
 }
 
@@ -161,4 +185,29 @@ double deriv_sigmoid(double x){
 	double ans;
 	ans = sigmoid(x)*(1-sigmoid(x));
 	return ans;
+}
+
+// Matrix Multiplication given two arrays
+void matrix_multiplication(double* array_1, int row_size_1, int col_size_1, int stride_1, double* array_2, int row_size_2, int stride_2, double* ans){
+
+for (int i = 0; i < row_1; i++){
+	for (int j = 0; j < col_1; j++){
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
