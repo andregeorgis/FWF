@@ -23,6 +23,8 @@ ceebs for now :stuck_out_tongue:
 
 [Newton's Game of Life](#newtons-game-of-life)
 
+[Conway's Game of Life and Death](#conways-game-of-life-and-death)
+
 <br/>
 
 ================================================
@@ -33,5 +35,10 @@ ceebs for now :stuck_out_tongue:
 
 Currently is just Conway's Game of Life, might do extra shit later
 :stuck_out_tongue:
+
+### Conway's Game of Life and Death
+
+Just a multiplayer version of conway's game of life.
+
 
 <br/>
