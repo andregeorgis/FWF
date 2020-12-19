@@ -1,23 +1,34 @@
-const gridContainer = document.getElementById("grid-container");
+
 
 function createGrid(rows, cols) {
-
     for (i = 0; i < rows; i++) {
         for (j = 0; j < cols; j++) {
-            let cell = document.createElement("div");
-            let appendedCell = gridContainer.appendChild(cell);
-            appendedCell.className = "cell";
-            appendedCell.id = `${i},${j}`;
-            appendedCell.addEventListener("click", selectCell);
+            createCell(i, j);
         }
     }
 }
 
+function createCell(row, col) {
+    var gridContainer = document.getElementById("grid-container");
+    var cell = document.createElement("div");
+    cell.className = "cell";
+    cell.id = `${row},${col}`;
+    cell.addEventListener("click", selectCell);
+    gridContainer.appendChild(cell);
+}
+
 function selectCell(event) {
     var clickedCell = event.target;
-    console.log(clickedCell);
-    clickedCell.style.backgroundColor = "red";
+    if (clickedCell.style.backgroundColor != "red") {
+        clickedCell.style.backgroundColor = "red";
+    }
+    else {
+        clickedCell.style.backgroundColor = "transparent";
+    }
 
 }
+
+
+
 
 createGrid(10, 10);
