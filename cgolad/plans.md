@@ -56,7 +56,8 @@ This stage is by far the easiest and most manageable with only a few requirement
 
 # Stage 3 - Adding Unnecessary Functionality
 
-
+1. Enter a menu before starting the game
+2. Toggles on the side
 
 
 
