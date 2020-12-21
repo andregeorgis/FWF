@@ -2,10 +2,19 @@
     display: grid;
     width: 200px;
     height: 200px;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .cell {
     border: 1px solid #000000;
+}
+
+.next-player {
+    background-color: inherit;
+    border: none;
+}
+
+.next-player:hover{
+    background: #eee;
 }
