@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="gameviewstyle.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='gameviewstyle.css')}}">
         <title>Conway's Game of Life and Death</title>
     </head>
     <body>
         <div id='grid-container'></div>
         <button id='next-player'>Next Player</button>
     </body>
-    <script src='basicgame.js'></script>
+    <script type='module' src="{{url_for('static', filename='basicgame.js')}}"></script>
 </html>

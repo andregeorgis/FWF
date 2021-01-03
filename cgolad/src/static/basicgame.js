@@ -1,43 +1,15 @@
+import { Cell } from "./cell.js";
+
+
 var cells = [];
 var player = 0;
-
-class Cell {
-    player = -1;
-
-    constructor(element) {
-        this.active = this.activeOff();
-        this.id = element.id;
-        //console.log(this.id);
-        this.element = element;
-    }
-
-    setPlayer(newPlayer) {
-        this.player = newPlayer;
-    }
-
-    activeOn() {
-        this.active = true;
-    }
-
-    activeOff() {
-        this.active = false;
-    }
-
-    getStatus() {
-        return this.active;
-    }
-
-    getPlayer() {
-        return this.player;
-    }
-}
 
 
 document.getElementById("next-player").addEventListener("click", function(){player=(player+1)%2;})
 
 function createGrid(rows, cols) {
-    for (i = 0; i < rows; i++) {
-        for (j = 0; j < cols; j++) {
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
             createCell(i, j);
         }
     }
@@ -55,7 +27,7 @@ function createCell(row, col) {
 
 function selectCell(event) {
     var clickedCell = event.target;
-    var bindedCell = getCellByID(clickedCell.id);
+    var bindedCell = getCell(clickedCell.id);
     bindedCell.setPlayer(player);
     if (player == 0) {
         changeColour(clickedCell, bindedCell, "red");
@@ -63,7 +35,8 @@ function selectCell(event) {
     else if (player == 1) {
         changeColour(clickedCell, bindedCell, "blue");
     }
-    console.log(bindedCell);
+    //console.log(clickedCell.id);
+    console.log(bindedCell.element.id);
 }
 
 function changeColour(viewCell, bindCell, colour) {
@@ -77,17 +50,18 @@ function changeColour(viewCell, bindCell, colour) {
     }
 }
 
-function getCellByID(id) {
-    for (cell of cells) {
-            if (cell.id == id) {
-                return cell;
-            }
-    }
+function getCell(id) {
+
+    /*for (cell of cells) {
+        if (cell.id == id) {
+            return cell;
+        }
+    }*/
+
+    var idx = id.indexOf(",");
+    var cellIdx = (parseInt(id.slice(0, idx)) * 10) + (parseInt(id.slice(idx + 1)));
+    return cells[cellIdx];
 }
 
 
-createGrid(4, 4);
-
-for (cell of cells) {
-    //console.log(cell.id);
-}
+createGrid(10, 10);
