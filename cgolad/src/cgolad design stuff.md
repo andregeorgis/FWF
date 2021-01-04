@@ -8,7 +8,7 @@ We are using a Model-View-Controller pattern.
 
 We are using JavaScript's module importing for modularity, but you have to run a HTTP server
 to test it otherwise there will be a CORS violation. Run the python file ```server.py``` and
-go to localhost:5000 to test.
+go to ```localhost:5000``` to test.
 
 
 The frontend cell is a HTML ```div``` element with a common class ```cell``` and unique id ```row,col```
