@@ -29,27 +29,32 @@ function selectCell(event) {
     var clickedCell = event.target;
     var bindedCell = getCell(clickedCell.id);
     if (player == 0 && bindedCell.getPlayer() != 1) {
-        changeColour(clickedCell, bindedCell, "red");
+        //changeColour(clickedCell, bindedCell, "red");
+        changeColour(bindedCell, "red");
     }
     else if (player == 1 && bindedCell.getPlayer() != 0) {
-        changeColour(clickedCell, bindedCell, "blue");
+        //changeColour(clickedCell, bindedCell, "blue");
+        changeColour(bindedCell, "blue");
     }
     //console.log(clickedCell.id);
-    console.log(bindedCell.getPlayer());
-    console.log(bindedCell.element.id);
+    //console.log(bindedCell.getPlayer());
+    //console.log(bindedCell.element.id);
 }
 
-function changeColour(viewCell, bindCell, colour) {
-    if (viewCell.style.backgroundColor != `${colour}`) {
-        bindCell.activeOn();
-        bindCell.setPlayer(player);
-        viewCell.style.backgroundColor = `${colour}`;
+function changeColour(cell, colour) {
+    var cellStyle = cell.element.style;
+    if (cellStyle.backgroundColor != `${colour}`) {
+        cell.activeOn();
+        cell.setPlayer(player);
+        cellStyle.backgroundColor = `${colour}`;
     }
     else {
-        bindCell.activeOff();
-        bindCell.setPlayer(-1);
-        viewCell.style.backgroundColor = "transparent";
+        cell.activeOff();
+        cell.setPlayer(-1);
+        cellStyle.backgroundColor = "transparent";
     }
+    //console.log(cellStyle.backgroundColor);
+    //console.log(cell.getPlayer());
 }
 
 function getCell(id) {
