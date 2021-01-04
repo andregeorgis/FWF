@@ -1,10 +1,9 @@
 export class Cell {
-    player = -1;
 
     constructor(element) {
+        this.player = -1;
         this.active = this.activeOff();
-        this.id = element.id;
-        //console.log(this.id);
+        //this.id = element.id;
         this.element = element;
     }
 

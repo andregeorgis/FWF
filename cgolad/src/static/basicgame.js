@@ -28,24 +28,26 @@ function createCell(row, col) {
 function selectCell(event) {
     var clickedCell = event.target;
     var bindedCell = getCell(clickedCell.id);
-    bindedCell.setPlayer(player);
-    if (player == 0) {
+    if (player == 0 && bindedCell.getPlayer() != 1) {
         changeColour(clickedCell, bindedCell, "red");
     }
-    else if (player == 1) {
+    else if (player == 1 && bindedCell.getPlayer() != 0) {
         changeColour(clickedCell, bindedCell, "blue");
     }
     //console.log(clickedCell.id);
+    console.log(bindedCell.getPlayer());
     console.log(bindedCell.element.id);
 }
 
 function changeColour(viewCell, bindCell, colour) {
     if (viewCell.style.backgroundColor != `${colour}`) {
         bindCell.activeOn();
+        bindCell.setPlayer(player);
         viewCell.style.backgroundColor = `${colour}`;
     }
     else {
         bindCell.activeOff();
+        bindCell.setPlayer(-1);
         viewCell.style.backgroundColor = "transparent";
     }
 }
