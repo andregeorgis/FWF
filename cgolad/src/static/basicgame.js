@@ -29,11 +29,9 @@ function selectCell(event) {
     var clickedCell = event.target;
     var bindedCell = getCell(clickedCell.id);
     if (player == 0 && bindedCell.getPlayer() != 1) {
-        //changeColour(clickedCell, bindedCell, "red");
         changeColour(bindedCell, "red");
     }
     else if (player == 1 && bindedCell.getPlayer() != 0) {
-        //changeColour(clickedCell, bindedCell, "blue");
         changeColour(bindedCell, "blue");
     }
     //console.log(clickedCell.id);
