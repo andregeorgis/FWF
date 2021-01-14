@@ -7,7 +7,10 @@ export class Grid {
         *       the grid here should be 10x10 too.
         */
 
-        this.grid = null;
+        this.grid = new Array(10);
+        for (var i = 0; i < 10; i++) {
+            this.grid[i] = new Array(10);
+        }
     }
 
     /* Create a function to access an element of the grid, given a string.
@@ -17,4 +20,15 @@ export class Grid {
     */
 
     // darius smells //
+    
+    getCell(id) {
+        var comma = id.indexOf(",");
+        var row = parseInt(id.slice(0,comma));
+        var col = parseInt(id.slice(comma+1));
+        return this.grid[row][col];
+    }
+
+    addCell(row, col, cell) {
+        this.grid[row][col] = cell;
+    }
 }

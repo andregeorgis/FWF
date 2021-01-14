@@ -1,7 +1,9 @@
 import { Cell } from "./cell.js";
+import { Grid } from "./grid.js";
 
 
 var cells = [];
+var grid = new Grid();
 var player = 0;
 
 
@@ -22,21 +24,20 @@ function createCell(row, col) {
     cell.id = `${row},${col}`;
     cell.addEventListener("click", selectCell);
     gridContainer.appendChild(cell);
-    cells.push(new Cell(cell));
+    var newCell = new Cell(cell);
+    grid.addCell(row, col, newCell);
+    //cells.push(newCell);
 }
 
 function selectCell(event) {
     var clickedCell = event.target;
-    var bindedCell = getCell(clickedCell.id);
+    var bindedCell = grid.getCell(clickedCell.id);
     if (player == 0 && bindedCell.getPlayer() != 1) {
         changeColour(bindedCell, "red");
     }
     else if (player == 1 && bindedCell.getPlayer() != 0) {
         changeColour(bindedCell, "blue");
     }
-    //console.log(clickedCell.id);
-    //console.log(bindedCell.getPlayer());
-    //console.log(bindedCell.element.id);
 }
 
 function changeColour(cell, colour) {
@@ -55,7 +56,7 @@ function changeColour(cell, colour) {
     //console.log(cell.getPlayer());
 }
 
-function getCell(id) {
+//function getCell(id) {
 
     /*for (cell of cells) {
         if (cell.id == id) {
@@ -63,10 +64,10 @@ function getCell(id) {
         }
     }*/
 
-    var idx = id.indexOf(",");
-    var cellIdx = (parseInt(id.slice(0, idx)) * 10) + (parseInt(id.slice(idx + 1)));
-    return cells[cellIdx];
-}
+    //var idx = id.indexOf(",");
+    //var cellIdx = (parseInt(id.slice(0, idx)) * 10) + (parseInt(id.slice(idx + 1)));
+    //return cells[cellIdx];
+//}
 
 
 createGrid(10, 10);

@@ -1,5 +1,14 @@
+html, body {
+    height: 100%;
+    width: 100%
+}
+
+
 #grid-container {
+    position: relative;
     display: grid;
+    left: 30%;
+    top: 30%;
     width: 200px;
     height: 200px;
     grid-template-columns: repeat(10, 1fr);

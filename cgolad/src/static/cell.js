@@ -2,7 +2,7 @@ export class Cell {
 
     constructor(element) {
         this.player = -1;
-        this.active = this.activeOff();
+        this.active = false;
         //this.id = element.id;
         this.element = element;
     }
