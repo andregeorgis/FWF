@@ -1,6 +1,6 @@
 export class Grid {
 
-    constructor(width, height, x, y, inside) {
+    constructor() {
         /* Implement the constructor to create a 2d square grid.
         *  Ensure the length on this grid matches,
         *  e.g. if the grid on the html is 10x10
