@@ -1,6 +1,6 @@
 export class Grid {
 
-    constructor() {
+    constructor(width, height, x, y, inside) {
         /* Implement the constructor to create a 2d square grid.
         *  Ensure the length on this grid matches,
         *  e.g. if the grid on the html is 10x10
@@ -20,7 +20,7 @@ export class Grid {
     */
 
     // darius smells //
-    
+
     getCell(id) {
         var comma = id.indexOf(",");
         var row = parseInt(id.slice(0,comma));
