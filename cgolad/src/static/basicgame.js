@@ -6,9 +6,8 @@ var cells = [];
 var grid_length = 10;
 var grid = new Grid(grid_length);
 var player = 0;
+var playerColours = ["red", "blue"]
 
-
-document.getElementById("next-player").addEventListener("click", function(){player=(player+1)%2;})
 
 function createGrid(rows, cols) {
     for (var i = 0; i < rows; i++) {
@@ -33,12 +32,8 @@ function createCell(row, col) {
 function selectCell(event) {
     var clickedCell = event.target;
     var bindedCell = grid.getCell(clickedCell.id);
-    if (player == 0 && bindedCell.getPlayer() != 1) {
-        changeColour(bindedCell, "red");
-    }
-    else if (player == 1 && bindedCell.getPlayer() != 0) {
-        changeColour(bindedCell, "blue");
-    }
+    if ((player == 0 && bindedCell.getPlayer() != 1) || (player == 1 && bindedCell.getPlayer() != 0))
+        changeColour(bindedCell, playerColours[player]);
 }
 
 function changeColour(cell, colour) {
@@ -57,6 +52,13 @@ function changeColour(cell, colour) {
     //console.log(cell.getPlayer());
 }
 
+function nextPlayer() {
+    player=(player+1)%2;
+    var button = document.getElementById("next-player")
+    console.log(button.style.backgroundColor)
+    button.style.backgroundColor = `${playerColours[player]}`
+}
+
 //function getCell(id) {
 
     /*for (cell of cells) {
@@ -70,5 +72,6 @@ function changeColour(cell, colour) {
     //return cells[cellIdx];
 //}
 
-
 createGrid(10, 10);
+document.getElementById("next-player").addEventListener("click", nextPlayer)
+document.getElementById("next-player").style.backgroundColor = `${playerColours[player]}`
