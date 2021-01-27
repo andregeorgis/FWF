@@ -3,7 +3,8 @@ import { Grid } from "./grid.js";
 
 
 var cells = [];
-var grid = new Grid();
+var grid_length = 10;
+var grid = new Grid(grid_length);
 var player = 0;
 
 

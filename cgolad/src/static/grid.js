@@ -1,15 +1,15 @@
 export class Grid {
 
-    constructor() {
+    constructor(length) {
         /* Implement the constructor to create a 2d square grid.
         *  Ensure the length on this grid matches,
         *  e.g. if the grid on the html is 10x10
         *       the grid here should be 10x10 too.
         */
-
-        this.grid = new Array(10);
-        for (var i = 0; i < 10; i++) {
-            this.grid[i] = new Array(10);
+        this.length = length
+        this.grid = new Array(length);
+        for (var i = 0; i < length; i++) {
+            this.grid[i] = new Array(length);
         }
     }
 
@@ -17,9 +17,12 @@ export class Grid {
     *  e.g. if the supplied string is "1,3", you should access the element
     *       this.grid[1][3].
     *  You do not need to do any error checking on the string.
+    *
+    *  Note that we use a string since the ids of each of the html cells are the
+    *  string "${row},${cell}"
     */
 
-    // darius smells //
+    // darius smells - I agree //
 
     getCell(id) {
         var comma = id.indexOf(",");
