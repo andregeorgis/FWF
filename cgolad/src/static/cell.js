@@ -34,9 +34,9 @@ export class Cell {
     }
 
     getCoord() {
-        var comma = element.id.indexOf(",");
-        var row = parseInt(id.slice(0,comma));
-        var col = parseInt(id.slice(comma+1));
+        var comma = this.element.id.indexOf(",");
+        var row = parseInt(this.element.id.slice(0,comma));
+        var col = parseInt(this.element.id.slice(comma+1));
         return [row, col]
     }
 }

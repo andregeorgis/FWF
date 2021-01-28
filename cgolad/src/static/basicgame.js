@@ -3,9 +3,15 @@ import { Grid } from "./grid.js";
 
 
 //var cells = [];
+
+// Backend grid
 var grid_length = 10;
 var grid = new Grid(grid_length);
-var neighbourGrid = Array(grid_length).map(x => Array(grid_length)); // 2d grid
+
+// 2d grid of 0s
+var neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(x => 0))
+
+// Current player info
 var player = 0;
 var playerColours = ["red", "blue"]
 
@@ -43,9 +49,14 @@ function selectCell(event) {
 }
 
 function updateCell(cell, colour) {
+    var coords = cell.getCoord()
+    console.log(neighbourGrid)
+    updateNeighbours(coords[0], coords[1], cell.isBlank() ? 1 : -1)
+    console.log(neighbourGrid)
+
     var cellStyle = cell.element.style;
 
-    if (cellStyle.backgroundColor != `${colour}`) {
+    if (cell.isBlank()) {
         cell.activate(player);
         cellStyle.backgroundColor = `${colour}`;
     }
@@ -57,11 +68,22 @@ function updateCell(cell, colour) {
     //console.log(cell.getPlayer());
 }
 
+function updateNeighbours(row, col, change) {
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            if ((i == 0 && j == 0) || !grid.isValidCoord(row + i, col + j))
+                continue
+
+            neighbourGrid[row + i][col + j] += change;
+        }
+    }
+}
+
 function nextPlayer() {
-    player=(player+1)%2;
+    player = (player + 1) % 2;
     var button = document.getElementById("next-player")
-    console.log(button.style.backgroundColor)
     button.style.backgroundColor = `${playerColours[player]}`
+    //console.log(button.style.backgroundColor)
 }
 
 // function nextGeneration() {
