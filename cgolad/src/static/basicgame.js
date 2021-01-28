@@ -13,7 +13,7 @@ var neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Arra
 
 // Current player info
 var player = 0;
-var playerColours = ["red", "blue"]
+var playerColours = ["#E71D36", "#2EC4B6"]
 
 
 function createGrid(rows, cols) {
@@ -50,7 +50,7 @@ function selectCell(event) {
 
 function updateCell(cell) {
     var coords = cell.getCoord()
-    updateNeighbour(coords[0], coords[1], cell.isBlank() ? 1 : -1)
+    updateNeighbour(coords[0], coords[1], player, cell.isBlank() ? 1 : -1)
     // console.log(neighbourGrid)
 
     var cellStyle = cell.element.style;
@@ -67,13 +67,13 @@ function updateCell(cell) {
     //console.log(cell.getPlayer());
 }
 
-function updateNeighbour(row, col, change) {
+function updateNeighbour(row, col, index, change) {
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
             if ((i == 0 && j == 0) || !grid.isValidCoord(row + i, col + j))
                 continue
 
-            neighbourGrid[row + i][col + j][player] += change;
+            neighbourGrid[row + i][col + j][index] += change;
         }
     }
 }
@@ -104,8 +104,8 @@ function nextGeneration() {
                 if (totalNum != 3)
                     continue
 
-                updateNeighbour(i, j, currCell.isBlank() ? 1 : -1)
                 var temp = playerOneNum > playerTwoNum ? 0 : 1
+                updateNeighbour(i, j, temp, currCell.isBlank() ? 1 : -1)
                 currCell.activate(temp);
                 currCell.element.style.backgroundColor = `${playerColours[temp]}`;
             }
@@ -115,7 +115,7 @@ function nextGeneration() {
                     case 3:
                         break;
                     default:
-                        updateNeighbour(i, j, currCell.isBlank() ? 1 : -1);
+                        updateNeighbour(i, j, currCell.getPlayer(), currCell.isBlank() ? 1 : -1);
                         currCell.deactivate();
                         currCell.element.style.backgroundColor = "transparent";
                         break;
