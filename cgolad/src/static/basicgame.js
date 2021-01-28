@@ -8,8 +8,8 @@ import { Grid } from "./grid.js";
 var grid_length = 10;
 var grid = new Grid(grid_length);
 
-// 2d grid of 0s
-var neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(x => 0))
+// A grid of arrays of length 2 for number of neighbours for each player
+var neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(x => [0, 0]))
 
 // Current player info
 var player = 0;
@@ -50,9 +50,8 @@ function selectCell(event) {
 
 function updateCell(cell, colour) {
     var coords = cell.getCoord()
-    console.log(neighbourGrid)
     updateNeighbours(coords[0], coords[1], cell.isBlank() ? 1 : -1)
-    console.log(neighbourGrid)
+    // console.log(neighbourGrid)
 
     var cellStyle = cell.element.style;
 
@@ -74,7 +73,7 @@ function updateNeighbours(row, col, change) {
             if ((i == 0 && j == 0) || !grid.isValidCoord(row + i, col + j))
                 continue
 
-            neighbourGrid[row + i][col + j] += change;
+            neighbourGrid[row + i][col + j][player] += change;
         }
     }
 }
