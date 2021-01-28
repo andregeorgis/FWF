@@ -47,6 +47,22 @@ button:focus {
     filter: brightness(0.8)
 }
 
+#i0_0 {
+    border-radius: 2vmin 0 0 0;
+}
+
+#i9_0 {
+    border-radius: 0 0 0 2vmin;
+}
+
+#i0_9 {
+    border-radius: 0 2vmin 0 0;
+}
+
+#i9_9 {
+    border-radius: 0 0 2vmin 0;
+}
+
 .next-player {
     background-color: inherit;
     border: none;
