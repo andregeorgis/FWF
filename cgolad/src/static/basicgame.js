@@ -123,8 +123,6 @@ function nextGeneration() {
             }
         }
     }
-
-    console.log(neighbourGrid.reduce((sum, x) => sum + x.reduce((temp, y) => temp + y, 0), 0))
 }
 
 //function getCell(id) {

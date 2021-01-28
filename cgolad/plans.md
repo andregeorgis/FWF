@@ -15,7 +15,7 @@ This stage is by far the easiest and most manageable with only a few requirement
   - There is an option to simulate a generation by clicking a button :white_check_mark:
 - Cells
   - If deactivated the cell is blank :white_check_mark:
-  - If hovered over while deactivated, the cell becomes slightly shaded
+  - If hovered over while deactivated, the cell becomes slightly shaded :white_check_mark:
   - If clicked while deactivated, it becomes activated - demonstrated by a change in colour :white_check_mark:
   - Clicking a cell with each player spawns a different colour :white_check_mark:
   - If clicked while activated, it becomes deactivated - demonstrated by becoming blank :white_check_mark:
