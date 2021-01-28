@@ -6,9 +6,11 @@
         <title>Conway's Game of Life and Death</title>
     </head>
     <body>
+        <div>
+            <button id='next-player'>Next Player</button>
+            <button id='next-generation'>Next Generation</button>
+        </div>
         <div id='grid-container'></div>
-        <button id='next-player'>Next Player</button>
-        <button id='next-generation'>Next Generation</button>
     </body>
     <script type='module' src="{{url_for('static', filename='basicgame.js')}}"></script>
 </html>
