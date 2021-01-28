@@ -29,7 +29,7 @@ function createCell(row, col) {
     var gridContainer = document.getElementById("grid-container");
     var cell = document.createElement("div");
     cell.className = "cell";
-    cell.id = `${row},${col}`;
+    cell.id = `i${row}_${col}`;
     cell.addEventListener("click", selectCell);
     gridContainer.appendChild(cell);
 
@@ -92,7 +92,7 @@ function nextGeneration() {
     for (let i = 0; i < grid.getLength(); i++) {
         for (let j = 0; j < grid.getLength(); j++) {
             // Get cell
-            var currId = `${i},${j}`;
+            var currId = `i${i}_${j}`;
             var currCell = grid.getCell(currId)
 
             // Get number of active neighbours

@@ -19,15 +19,17 @@ export class Grid {
     *  You do not need to do any error checking on the string.
     *
     *  Note that we use a string since the ids of each of the html cells are the
-    *  string "${row},${cell}"
+    *  string "i${row}_${cell}"
+    *
+    *  The initial 'i' and the '_' is to make sure it is a valid html id
     */
 
     // darius smells - I agree //
 
     getCell(id) {
-        var comma = id.indexOf(",");
-        var row = parseInt(id.slice(0,comma));
-        var col = parseInt(id.slice(comma+1));
+        var sep = id.indexOf("_");
+        var row = parseInt(id.slice(1,sep));
+        var col = parseInt(id.slice(sep+1));
         return this.grid[row][col];
     }
 
