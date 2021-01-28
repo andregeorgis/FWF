@@ -7,10 +7,11 @@ html, body {
 #grid-container {
     position: relative;
     display: grid;
-    left: 30%;
-    top: 30%;
-    width: 200px;
-    height: 200px;
+    align: center;
+    top: 10%;
+    margin: auto;
+    width: 75vmin;
+    height: 75vmin;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
 }

@@ -9,7 +9,7 @@ The premise of the game is to introduce a multiplayer aspect to the classic game
 This stage is by far the easiest and most manageable with only a few requirements:
 
 - Website Overhead
-  - The html page includes a fixed size grid of cells **(make this bigger)**
+  - The html page includes a fixed size grid of cells :white_check_mark:
   - There is an option to click on the grid to "activate" or "deactivate" the cell - indicated by colour :white_check_mark:
   - There is an option to "switch players" by clicking a button :white_check_mark:
   - There is an option to simulate a generation by clicking a button :white_check_mark:
