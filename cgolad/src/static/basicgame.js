@@ -2,9 +2,10 @@ import { Cell } from "./cell.js";
 import { Grid } from "./grid.js";
 
 
-var cells = [];
+//var cells = [];
 var grid_length = 10;
 var grid = new Grid(grid_length);
+var neighbourGrid = Array(grid_length).map(x => Array(grid_length)); // 2d grid
 var player = 0;
 var playerColours = ["red", "blue"]
 
@@ -18,12 +19,15 @@ function createGrid(rows, cols) {
 }
 
 function createCell(row, col) {
+    // Frontend cell
     var gridContainer = document.getElementById("grid-container");
     var cell = document.createElement("div");
     cell.className = "cell";
     cell.id = `${row},${col}`;
     cell.addEventListener("click", selectCell);
     gridContainer.appendChild(cell);
+
+    // Backend cell
     var newCell = new Cell(cell);
     grid.addCell(row, col, newCell);
     //cells.push(newCell);
@@ -32,20 +36,21 @@ function createCell(row, col) {
 function selectCell(event) {
     var clickedCell = event.target;
     var bindedCell = grid.getCell(clickedCell.id);
-    if ((player == 0 && bindedCell.getPlayer() != 1) || (player == 1 && bindedCell.getPlayer() != 0))
-        changeColour(bindedCell, playerColours[player]);
+
+    // Update current cell
+    if (bindedCell.isBlank() || bindedCell.getPlayer() == player)
+        updateCell(bindedCell, playerColours[player]);
 }
 
-function changeColour(cell, colour) {
+function updateCell(cell, colour) {
     var cellStyle = cell.element.style;
+
     if (cellStyle.backgroundColor != `${colour}`) {
-        cell.activeOn();
-        cell.setPlayer(player);
+        cell.activate(player);
         cellStyle.backgroundColor = `${colour}`;
     }
     else {
-        cell.activeOff();
-        cell.setPlayer(-1);
+        cell.deactivate();
         cellStyle.backgroundColor = "transparent";
     }
     //console.log(cellStyle.backgroundColor);
@@ -58,6 +63,10 @@ function nextPlayer() {
     console.log(button.style.backgroundColor)
     button.style.backgroundColor = `${playerColours[player]}`
 }
+
+// function nextGeneration() {
+//
+// }
 
 //function getCell(id) {
 
@@ -74,4 +83,5 @@ function nextPlayer() {
 
 createGrid(10, 10);
 document.getElementById("next-player").addEventListener("click", nextPlayer)
+// document.getElementById("next-generation").addEventListener("click", nextGeneration)
 document.getElementById("next-player").style.backgroundColor = `${playerColours[player]}`

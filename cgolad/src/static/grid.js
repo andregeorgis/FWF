@@ -34,4 +34,12 @@ export class Grid {
     addCell(row, col, cell) {
         this.grid[row][col] = cell;
     }
+
+    getLength() {
+        return this.length;
+    }
+
+    isValidCoord(row, col) {
+        return row >= 0 && row < this.length && col >= 0 && col < this.length;
+    }
 }
