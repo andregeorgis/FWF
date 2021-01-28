@@ -12,19 +12,19 @@ This stage is by far the easiest and most manageable with only a few requirement
   - The html page includes a fixed size grid of cells **(make this bigger)**
   - There is an option to click on the grid to "activate" or "deactivate" the cell - indicated by colour :white_check_mark:
   - There is an option to "switch players" by clicking a button :white_check_mark:
-  - There is an option to simulate a generation by clicking a button
+  - There is an option to simulate a generation by clicking a button :white_check_mark:
 - Cells
   - If deactivated the cell is blank :white_check_mark:
   - If hovered over while deactivated, the cell becomes slightly shaded
   - If clicked while deactivated, it becomes activated - demonstrated by a change in colour :white_check_mark:
   - Clicking a cell with each player spawns a different colour :white_check_mark:
   - If clicked while activated, it becomes deactivated - demonstrated by becoming blank :white_check_mark:
-  - If activated by one player, the other player can neither activate or deactivate it
+  - If activated by one player, the other player can neither activate or deactivate it :white_check_mark:
 - Conway's Game of Life and Death Rules
-  - Each activated cell with one or no activated neighbours, deactivates - regardless of colour of neighbours
-  - Each activated cell with four or more activated neighbours, deactivates - regardless of colour of neighbours
-  - Each activated cell with two or three activated neighbours, stays active - regardless of colour of neighbours
-  - Each deactivated cell with three activated neighbours, becomes active - becomes the "predominant" colour
+  - Each activated cell with one or no activated neighbours, deactivates - regardless of colour of neighbours :white_check_mark:
+  - Each activated cell with four or more activated neighbours, deactivates - regardless of colour of neighbours :white_check_mark:
+  - Each activated cell with two or three activated neighbours, stays active - regardless of colour of neighbours :white_check_mark:
+  - Each deactivated cell with three activated neighbours, becomes active - becomes the "predominant" colour :white_check_mark:
     - In all cases there has to be at least 2 cells of the same colour - this will be the colour of the newly activated cell
 
 
@@ -52,7 +52,7 @@ This stage is by far the easiest and most manageable with only a few requirement
 
 <sup>YEET</sup>Anything with this footnote is just an initial placeholder, and will be revised later for game balancing
 
- 
+
 
 # Stage 3 - Adding Unnecessary Functionality
 
@@ -66,4 +66,4 @@ This stage is by far the easiest and most manageable with only a few requirement
 # Stage 4 - Adding Custom Modes
 
 - fuck wit rules and shit
-- Maybe add something were you can "convert" or "infect" a cell? :P 
+- Maybe add something were you can "convert" or "infect" a cell? :P
