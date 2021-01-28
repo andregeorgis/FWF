@@ -27,3 +27,12 @@ html, body {
 .next-player:hover{
     background: #eee;
 }
+
+.next-generation {
+    background-color: inherit;
+    border: none;
+}
+
+.next-generation:hover{
+    background: #eee;
+}
