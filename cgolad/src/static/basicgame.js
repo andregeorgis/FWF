@@ -1,56 +1,5 @@
-import { Cell } from "./cell.js";
-import { Grid } from "./grid.js";
-import { playerColours, grid } from "./setup.js";
-
-// A grid of arrays of length 2 for number of neighbours for each player
-var neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(y => [0, 0]))
-
-// Current player info
-var player = 0;
-
-function selectCell(event) {
-    var clickedCell = event.target;
-    var bindedCell = grid.getCell(clickedCell.id);
-
-    // Update current cell
-    if (bindedCell.isBlank() || bindedCell.getPlayer() == player)
-        updateCell(bindedCell);
-}
-
-function updateCell(cell) {
-    var coords = cell.getCoord()
-    updateNeighbour(coords[0], coords[1], player, cell.isBlank() ? 1 : -1)
-    // console.log(neighbourGrid)
-
-    var cellStyle = cell.element.style;
-
-    if (cell.isBlank()) {
-        cell.activate(player);
-        cellStyle.backgroundColor = `${playerColours[player]}`;
-    }
-    else {
-        cell.deactivate();
-        cellStyle.backgroundColor = "transparent";
-    }
-}
-
-function updateNeighbour(row, col, index, change) {
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            if ((i == 0 && j == 0) || !grid.isValidCoord(row + i, col + j))
-                continue
-
-            neighbourGrid[row + i][col + j][index] += change;
-        }
-    }
-}
-
-function nextPlayer() {
-    player = (player + 1) % 2;
-    var button = document.getElementById("next-player");
-    button.style.backgroundColor = `${playerColours[player]}`;
-    //console.log(button.style.backgroundColor)
-}
+import { playerColours, grid} from "./setup.js";
+import { neighbourGrid, updateNeighbour } from "./gamestate.js";
 
 function nextGeneration() {
     // Make a copy of the neighbour grid
@@ -92,7 +41,4 @@ function nextGeneration() {
     }
 }
 
-createGrid(10, 10);
-document.getElementById("next-player").addEventListener("click", nextPlayer);
 document.getElementById("next-generation").addEventListener("click", nextGeneration);
-document.getElementById("next-player").style.backgroundColor = `${playerColours[player]}`;
