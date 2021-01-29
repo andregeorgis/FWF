@@ -11,19 +11,19 @@ html, body {
     top: 30%;
     width: 200px;
     height: 200px;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 }
 
 .cell {
     border: 1px solid #000000;
 }
 
-.next-player {
+.next-player, .next-gen {
     background-color: inherit;
     border: none;
 }
 
-.next-player:hover{
+.next-player:hover, .next-gen:hover {
     background: #eee;
 }

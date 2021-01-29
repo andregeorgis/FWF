@@ -9,8 +9,9 @@ We are using a Model-View-Controller pattern.
 
 We are using JavaScript's module importing for modularity, but you have to run a HTTP server
 to test it otherwise there will be a CORS violation. Run the python file ```server.py``` and
-go to ```localhost:5000``` to test it locally. If you want to test it on another computer
-that isn't running the server, you need to connect by the url ```<server ip address>:80```.
+go to ```localhost:6574``` to test it locally (I changed to new port for security reasons).
+If you want to test it on another computer that isn't running the server,
+you need to connect by the url ```<server ip address>:80/```.
 I put port 80 because you need to change your firewall to allow ports or
 alternatively ubuntu auto allows port 80
 BE CAREFUL ABOUT SECURITY

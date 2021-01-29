@@ -7,9 +7,9 @@ export class Grid {
         *       the grid here should be 10x10 too.
         */
 
-        this.grid = new Array(10);
-        for (var i = 0; i < 10; i++) {
-            this.grid[i] = new Array(10);
+        this.grid = new Array(5);
+        for (var i = 0; i < 5; i++) {
+            this.grid[i] = new Array(5);
         }
     }
 
@@ -31,4 +31,5 @@ export class Grid {
     addCell(row, col, cell) {
         this.grid[row][col] = cell;
     }
+
 }

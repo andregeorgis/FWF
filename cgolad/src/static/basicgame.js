@@ -2,12 +2,13 @@ import { Cell } from "./cell.js";
 import { Grid } from "./grid.js";
 
 
-var cells = [];
 var grid = new Grid();
 var player = 0;
 
+createGrid(5, 5);
 
-document.getElementById("next-player").addEventListener("click", function(){player=(player+1)%2;})
+document.getElementById("next-player").addEventListener("click", function(){player=(player+1)%2;});
+document.getElementById("next-gen").addEventListener("click", runGame);
 
 function createGrid(rows, cols) {
     for (var i = 0; i < rows; i++) {
@@ -26,7 +27,6 @@ function createCell(row, col) {
     gridContainer.appendChild(cell);
     var newCell = new Cell(cell);
     grid.addCell(row, col, newCell);
-    //cells.push(newCell);
 }
 
 function selectCell(event) {
@@ -52,22 +52,61 @@ function changeColour(cell, colour) {
         cell.setPlayer(-1);
         cellStyle.backgroundColor = "transparent";
     }
-    //console.log(cellStyle.backgroundColor);
-    //console.log(cell.getPlayer());
 }
 
-//function getCell(id) {
+function runGame() {
+    var turns = 0;
+    var p1Counter = 0;
+    var p2Counter = 0;
+    var total = 0;
 
-    /*for (cell of cells) {
-        if (cell.id == id) {
-            return cell;
+    while (turns >= 0) {
+        // Constructing a temporary grid to store new generation
+
+        //var tempGrid = new Array(5);
+        //for (var i = 0; i < 5; i++) {
+        //    tempGrid[i] = new Array(5);
+        //}
+
+        var tempGrid = grid.grid.slice();
+        console.log(tempGrid);
+
+
+
+
+        for (var row = 0; row < 5; row++) {
+            for (var col = 0; col < 5; col++) {
+
+                for (var i = -1; i < 2; i++) {
+                    for (var j = -1; j < 2; j++) {
+                        if (row + i < 0 || row + i >= 5) {continue;}
+                        if (col + j < 0 || col + j >= 5) {continue;}
+
+                        if ( i != 0 || j != 0 ) {
+                            //console.log(row+i,col+j);
+                            var cell = grid.getCell( (row + i).toString() + "," + (col + j).toString() );
+                            if (cell.element.style.backgroundColor == "red") {p1Counter++;}
+                            else if (cell.element.style.backgroundColor == "blue") {p2Counter++;}
+                        }
+                    }
+                }
+                total = p1Counter + p2Counter;
+                console.log(total);
+                if ( cell.getStatus() == true && (total <= 1 || total >= 4) ) {
+                    changeColour(tempGrid[row][col], "transparent")
+                }
+                else if ( cell.getStatus() == false && total == 3 ) {
+                    if (p1Counter > p2Counter) {changeColour(cell, "red");}
+                    else {changeColour(tempGrid[row][col], "blue");}
+                }
+                total = 0;
+                p1Counter = 0;
+                p2Counter = 0;
+            }
         }
-    }*/
-
-    //var idx = id.indexOf(",");
-    //var cellIdx = (parseInt(id.slice(0, idx)) * 10) + (parseInt(id.slice(idx + 1)));
-    //return cells[cellIdx];
-//}
 
 
-createGrid(10, 10);
+
+        turns--;
+    }
+}
