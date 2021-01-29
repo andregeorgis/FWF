@@ -11,12 +11,14 @@ export class Cell {
         this.player = newPlayer;
     }
 
-    activeOn() {
+    activate(player) {
         this.active = true;
+        this.player = player;
     }
 
-    activeOff() {
+    deactivate() {
         this.active = false;
+        this.player = -1;
     }
 
     getStatus() {
@@ -25,5 +27,16 @@ export class Cell {
 
     getPlayer() {
         return this.player;
+    }
+
+    isBlank() {
+        return !this.active;
+    }
+
+    getCoord() {
+        var sep = this.element.id.indexOf("_");
+        var row = parseInt(this.element.id.slice(1,sep));
+        var col = parseInt(this.element.id.slice(sep+1));
+        return [row, col]
     }
 }

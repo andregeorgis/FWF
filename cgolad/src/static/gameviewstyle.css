@@ -1,29 +1,82 @@
 html, body {
     height: 100%;
-    width: 100%
+    width: 100%;
+    font-family: "Lucida Console", Monospace;
+    text-align: center;
+    color: #011627;
+    background-color: #FDFFFC;
 }
 
+button {
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+button:focus {
+    outline: none;
+}
+
+#next-generation {
+    background-color: #FF9F1C;
+}
+
+#title {
+    text-align: center;
+}
 
 #grid-container {
     position: relative;
     display: grid;
-    left: 30%;
-    top: 30%;
-    width: 200px;
-    height: 200px;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    align: center;
+    top: 2%;
+    margin: auto;
+    width: 75vmin;
+    height: 75vmin;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
 }
 
 .cell {
+    background-color: white;
     border: 1px solid #000000;
 }
 
-.next-player, .next-gen {
+.cell:hover {
+    filter: brightness(0.8)
+}
+
+#i0_0 {
+    border-radius: 2vmin 0 0 0;
+}
+
+#i9_0 {
+    border-radius: 0 0 0 2vmin;
+}
+
+#i0_9 {
+    border-radius: 0 2vmin 0 0;
+}
+
+#i9_9 {
+    border-radius: 0 0 2vmin 0;
+}
+
+.next-player {
     background-color: inherit;
     border: none;
 }
 
 .next-player:hover, .next-gen:hover {
+    background: #eee;
+}
+
+.next-generation {
+    background-color: inherit;
+    border: none;
+}
+
+.next-generation:hover{
     background: #eee;
 }
