@@ -1,12 +1,16 @@
 from flask import Flask, render_template
 from flask_cors import CORS
 
+html = ['stage_one.html', 'stage_two.html']
+stage = int(input("What Stage? "))
+html_to_render = html[stage - 1]
+
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/')
 def main():
-    return render_template('gameview.html')
+    return render_template(html_to_render)
 
 # Use for testing on same computer
 app.run(port=6574)

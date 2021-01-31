@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{url_for('static', filename='gameviewstyle.css')}}">
+        <title>Conway's Game of Life and Death</title>
+    </head>
+    <body>
+        <h1>Conway's Game of Life and Death</h1>
+        <p>A classic zero player simulation now adapted to incorporate a multiplayer aspect.</p>
+        <div id="stage-one">
+            <button id='next-player'>Next Player</button>
+            <button id='next-generation'>Next Generation</button>
+        </div>
+        <div id='grid-container'></div>
+    </body>
+    <script type='module' src="{{url_for('static', filename='setup.js')}}"></script>
+    <script type='module' src="{{url_for('static', filename='startup.js')}}"></script>
+</html>

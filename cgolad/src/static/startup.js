@@ -23,6 +23,17 @@ function createCell(row, col) {
     grid.addCell(row, col, newCell);
 }
 
+// Common for all stages
 createGrid(grid_length, grid_length);
-document.getElementById("next-player").addEventListener("click", nextPlayer);
-document.getElementById("next-generation").addEventListener("click", nextGeneration);
+
+// Stage One
+var stage_one = document.getElementById("stage-one");
+
+if (stage_one) {
+    console.log("hi")
+    document.getElementById("next-player").addEventListener("click", nextPlayer);
+    document.getElementById("next-generation").addEventListener("click", nextGeneration);
+}
+
+// Stage Two
+var stage_two = document.getElementById("stage-two");
