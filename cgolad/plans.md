@@ -31,6 +31,9 @@ This stage is by far the easiest and most manageable with only a few requirement
 
 # Stage 2 - Introducing Game Design and Rule Design
 
+- Choosing your stage
+  - First load buttons that ask for which stage
+  - Depending on button pressed, load specific webpage (for stage 1 and for stage 2)
 - Rule Design
   - We split the game into rounds that have two different stages, a Move Stage and a Wait Stage
   - In the Move Stage players are allowed to click on the cell grid to "make moves" by activating or deactivating cells
@@ -58,6 +61,8 @@ This stage is by far the easiest and most manageable with only a few requirement
 
 1. Enter a menu before starting the game
 2. Toggles on the side
+3. Undo button
+4. Click and Drag
 
 
 
