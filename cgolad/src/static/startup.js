@@ -30,7 +30,7 @@ createGrid(grid_length, grid_length);
 var stage_one = document.getElementById("stage-one");
 
 if (stage_one) {
-    console.log("hi")
+    console.log(stage_one)
     document.getElementById("next-player").addEventListener("click", nextPlayer);
     document.getElementById("next-generation").addEventListener("click", nextGeneration);
 }
