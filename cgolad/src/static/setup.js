@@ -1,11 +1,8 @@
 import { Grid } from "./grid.js";
-
-export var playerColours = ["#E71D36", "#2EC4B6"];
+import { Cell } from "./cell.js";
 
 // Backend grid
-export var player = 0;
-export var grid_length = 10;
-export var grid = new Grid(grid_length);
+var grid = new Grid(10);
 
 
 // A grid of arrays of length 2 for number of neighbours for each player
