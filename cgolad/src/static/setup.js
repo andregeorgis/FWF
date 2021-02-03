@@ -1,37 +1,42 @@
-import { Grid } from "./grid.js";
-import { Cell } from "./cell.js";
+export { selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH };
 
-export var playerColours = ["#E71D36", "#2EC4B6"];
+import { GRID_LENGTH, Grid } from "./grid.js";
+import { Cell } from "./cell.js";
+import { PLAYER_ONE, PLAYER_TWO, GameState } from "./gamestate.js";
 
 // Backend grid
-export var player = 0;
-export var grid_length = 10;
-var grid = new Grid(grid_length);
+var grid = new Grid();
 
+// Game object
+var game = new GameState();
 
 // A grid of arrays of length 2 for number of neighbours for each player
 var neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(y => [0, 0]))
 
+
+function createBackEndCell(row, col, cell) {
+    grid.addCell(row, col, new Cell(cell));
+}
 
 function selectCell(event) {
     var clickedCell = event.target;
     var bindedCell = grid.getCell(clickedCell.id);
 
     // Update current cell
-    if (bindedCell.isBlank() || bindedCell.getPlayer() == player)
+    if (bindedCell.isBlank() || bindedCell.getPlayer() == game.getPlayer())
         updateCell(bindedCell);
 }
 
 function updateCell(cell) {
     var coords = cell.getCoord()
-    updateNeighbour(coords[0], coords[1], player, cell.isBlank() ? 1 : -1)
+    updateNeighbour(coords[0], coords[1], game.getPlayer(), cell.isBlank() ? 1 : -1)
     // console.log(neighbourGrid)
 
     var cellStyle = cell.element.style;
 
     if (cell.isBlank()) {
-        cell.activate(player);
-        cellStyle.backgroundColor = `${playerColours[player]}`;
+        cell.activate(game.getPlayer());
+        cellStyle.backgroundColor = `${game.getPlayerColour()}`;
     }
     else {
         cell.deactivate();
@@ -51,9 +56,9 @@ function updateNeighbour(row, col, index, change) {
 }
 
 function nextPlayer() {
-    player = (player + 1) % 2;
+    game.changePlayer();
     var button = document.getElementById("next-player");
-    button.style.backgroundColor = `${playerColours[player]}`;
+    button.style.backgroundColor = `${game.getPlayerColour()}`;
     //console.log(button.style.backgroundColor)
     //export player;
 }
@@ -77,10 +82,10 @@ function nextGeneration() {
                 if (totalNum != 3)
                     continue
 
-                var temp = playerOneNum > playerTwoNum ? 0 : 1
+                var temp = playerOneNum > playerTwoNum ? PLAYER_ONE : PLAYER_TWO
                 updateNeighbour(i, j, temp, currCell.isBlank() ? 1 : -1)
                 currCell.activate(temp);
-                currCell.element.style.backgroundColor = `${playerColours[temp]}`;
+                currCell.element.style.backgroundColor = `${game.getPlayerColour()}`;
             }
             else {
                 switch (totalNum) {
@@ -97,10 +102,3 @@ function nextGeneration() {
         }
     }
 }
-
-export function createBackEndCell(row, col, cell) {
-    grid.addCell(row, col, new Cell(cell));
-}
-
-
-export { selectCell, nextPlayer, nextGeneration }

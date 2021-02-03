@@ -1,14 +1,18 @@
-export class Grid {
+export { GRID_LENGTH, Grid };
 
-    constructor(length) {
+var GRID_LENGTH = 10;
+
+class Grid {
+
+    constructor() {
         /* Implement the constructor to create a 2d square grid.
         *  Ensure the length on this grid matches,
         *  e.g. if the grid on the html is 10x10
         *       the grid here should be 10x10 too.
         */
-        this.length = length
-        this.grid = new Array(length);
-        for (var i = 0; i < length; i++) {
+        this.length = GRID_LENGTH;
+        this.grid = new Array(GRID_LENGTH);
+        for (var i = 0; i < GRID_LENGTH; i++) {
             this.grid[i] = new Array(length);
         }
     }

@@ -1,4 +1,4 @@
-import { grid_length, selectCell, nextPlayer, nextGeneration, createBackEndCell } from "./setup.js";
+import { selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH } from "./setup.js";
 
 function createGrid(rows, cols) {
     for (var i = 0; i < rows; i++) {
