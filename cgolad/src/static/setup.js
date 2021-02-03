@@ -97,5 +97,9 @@ function nextGeneration() {
     }
 }
 
+function createBackEndCell(row, col, cell) {
+    grid.addCell(row, col, new Cell(cell));
+}
+
 
 export { selectCell, nextPlayer, nextGeneration }

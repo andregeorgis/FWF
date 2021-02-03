@@ -1,15 +1,17 @@
-import { playerColours, grid_length, grid, selectCell, nextPlayer, nextGeneration } from "./setup.js";
+import { grid, selectCell, nextPlayer, nextGeneration, createBackEndCell } from "./setup.js";
 import { Cell } from "./cell.js";
 
 function createGrid(rows, cols) {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
-            createCell(i, j);
+            var cell = createFrontEndCell(i, j);
+
+            createBackEndCell(i, j, cell);
         }
     }
 }
 
-function createCell(row, col) {
+function createFrontEndCell(row, col) {
     // Frontend cell
     var gridContainer = document.getElementById("grid-container");
     var cell = document.createElement("div");
@@ -17,10 +19,7 @@ function createCell(row, col) {
     cell.id = `i${row}_${col}`;
     cell.addEventListener("click", selectCell);
     gridContainer.appendChild(cell);
-
-    // Backend cell
-    var newCell = new Cell(cell);
-    grid.addCell(row, col, newCell);
+    return cell;
 }
 
 createGrid(grid_length, grid_length);
