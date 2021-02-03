@@ -6,7 +6,7 @@ function redirect() {
     if (stage == 'stage-one') {
         location.replace('/stage-one');
     }
-    else {
+    else if (stage == 'stage-two') {
         location.replace('/stage-two');
     }
 }
