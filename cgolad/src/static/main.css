@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: "Lucida Console", Monospace;
+    text-align: center;
+    color: #011627;
+    background-color: #FDFFFC;
+}
+
+button {
+    padding: 10px;
+    color: white;
+    background-color: #FF9F1C;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+button:focus {
+    outline: none;
+}
+
+#title {
+    text-align: center;
+}
