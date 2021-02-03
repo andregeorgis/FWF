@@ -1,8 +1,9 @@
-export { game, selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH, STAGE_ONE, STAGE_TWO };
+export { game, selectCell, nextPlayer, nextGeneration, createBackEndCell };
 
-import { GRID_LENGTH, Grid } from "./grid.js";
+import { Grid } from "./grid.js";
 import { Cell } from "./cell.js";
-import { PLAYER_ONE, PLAYER_TWO, STAGE_ONE, STAGE_TWO, GameState } from "./gamestate.js";
+import { GameState } from "./gamestate.js";
+import { PLAYER_ONE, PLAYER_TWO } from "./constants.js"
 
 // Backend grid
 var grid = new Grid();

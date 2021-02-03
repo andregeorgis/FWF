@@ -1,8 +1,6 @@
-export { GRID_LENGTH, Grid };
+import { GRID_LENGTH } from "./constants.js"
 
-var GRID_LENGTH = 10;
-
-class Grid {
+export class Grid {
 
     constructor() {
         /* Implement the constructor to create a 2d square grid.

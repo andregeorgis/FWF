@@ -1,12 +1,6 @@
-export { PLAYER_ONE, PLAYER_TWO, STAGE_ONE, STAGE_TWO, GameState };
+import { PLAYER_ONE, PLAYER_TWO, COLOURS, STAGE_ONE, STAGE_TWO } from "./constants.js"
 
-var PLAYER_ONE = 0;
-var PLAYER_TWO = 1;
-var COLOURS = ["#E71D36", "#2EC4B6"];
-var STAGE_ONE = 1;
-var STAGE_TWO = 2;
-
-class GameState {
+export class GameState {
     constructor() {
         this.player = PLAYER_ONE;
         this.colours = COLOURS;
@@ -24,7 +18,7 @@ class GameState {
     }
 
     changePlayer() {
-        this.player = this.player ? 0 : 1;
+        this.player = this.player == PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE;
     }
 
     getPlayerColour() {
