@@ -1,8 +1,12 @@
 import { Grid } from "./grid.js";
 import { Cell } from "./cell.js";
 
+export var playerColours = ["#E71D36", "#2EC4B6"];
+
 // Backend grid
-var grid = new Grid(10);
+export var player = 0;
+export var grid_length = 10;
+var grid = new Grid(grid_length);
 
 
 // A grid of arrays of length 2 for number of neighbours for each player
@@ -94,7 +98,7 @@ function nextGeneration() {
     }
 }
 
-function createBackEndCell(row, col, cell) {
+export function createBackEndCell(row, col, cell) {
     grid.addCell(row, col, new Cell(cell));
 }
 
