@@ -1,8 +1,8 @@
-export { selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH };
+export { game, selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH, STAGE_ONE, STAGE_TWO };
 
 import { GRID_LENGTH, Grid } from "./grid.js";
 import { Cell } from "./cell.js";
-import { PLAYER_ONE, PLAYER_TWO, GameState } from "./gamestate.js";
+import { PLAYER_ONE, PLAYER_TWO, STAGE_ONE, STAGE_TWO, GameState } from "./gamestate.js";
 
 // Backend grid
 var grid = new Grid();
@@ -42,6 +42,9 @@ function updateCell(cell) {
         cell.deactivate();
         cellStyle.backgroundColor = "transparent";
     }
+
+    // Update the GameState
+    game.updateGame()
 }
 
 function updateNeighbour(row, col, index, change) {

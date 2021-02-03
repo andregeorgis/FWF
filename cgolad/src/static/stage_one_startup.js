@@ -1,4 +1,4 @@
-import { selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH } from "./setup.js";
+import { game, selectCell, nextPlayer, nextGeneration, createBackEndCell, GRID_LENGTH, STAGE_ONE } from "./setup.js";
 
 function createGrid(rows, cols) {
     for (var i = 0; i < rows; i++) {
@@ -21,6 +21,7 @@ function createFrontEndCell(row, col) {
     return cell;
 }
 
+game.config(STAGE_ONE)
 createGrid(GRID_LENGTH, GRID_LENGTH);
 document.getElementById("next-player").addEventListener("click", nextPlayer);
 document.getElementById("next-generation").addEventListener("click", nextGeneration);
