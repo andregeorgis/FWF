@@ -1,3 +1,5 @@
+import { BLANK_COLOUR } from "./constants.js"
+
 export class Cell {
 
     constructor(element) {
@@ -5,19 +7,22 @@ export class Cell {
         this.active = false;
         //this.id = element.id;
         this.element = element;
+        this.style = element.style;
     }
 
     setPlayer(newPlayer) {
         this.player = newPlayer;
     }
 
-    activate(player) {
+    activate(player, colour) {
         this.active = true;
+        this.style.backgroundColor = `${colour}`;
         this.player = player;
     }
 
     deactivate() {
         this.active = false;
+        this.style.backgroundColor = BLANK_COLOUR;
         this.player = -1;
     }
 

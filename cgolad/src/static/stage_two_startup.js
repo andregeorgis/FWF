@@ -1,4 +1,4 @@
-import { game, selectCell, nextPlayer, nextGeneration, createBackEndCell } from "./setup.js";
+import { game, selectCell, nextPlayer, nextGeneration } from "./event_bridge.js";
 import { GRID_LENGTH, STAGE_TWO } from "./constants.js"
 
 function createGrid(rows, cols) {
@@ -6,7 +6,7 @@ function createGrid(rows, cols) {
         for (var j = 0; j < cols; j++) {
             var cell = createFrontEndCell(i, j);
 
-            createBackEndCell(i, j, cell);
+            game.createBackEndCell(i, j, cell);
         }
     }
 }
