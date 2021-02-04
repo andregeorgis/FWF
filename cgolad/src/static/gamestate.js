@@ -1,4 +1,4 @@
-import { GRID_LENGTH, PLAYER_ONE, PLAYER_TWO, PLAYER_COLOURS, STAGE_ONE, STAGE_TWO } from "./constants.js"
+import { GRID_LENGTH, PLAYER_ONE, PLAYER_TWO, PLAYER_COLOURS, STAGE_ONE, STAGE_TWO, MOVE_CAP, GENERATION_CAP } from "./constants.js"
 import { Grid } from "./grid.js"
 import { Cell } from "./cell.js"
 
@@ -65,8 +65,8 @@ export class GameState {
                 break;
         }
 
-        // Update the GameState
-        this.updateGame()
+        // Update the game
+        this.addMove();
     }
 
     updateNeighbour(row, col, index, change) {
@@ -142,11 +142,25 @@ export class GameState {
                 break
             case STAGE_TWO:
             default:
+                this.stageTwoUpdate();
                 break;
         }
     }
 
     stageOneUpdate() {
         console.log("noice");
+    }
+
+    stageTwoUpdate() {
+        if (this.numOfMoves != MOVE_CAP)
+            return;
+
+        if (this.getPlayer() == PLAYER_TWO) {
+            for (let i = 0; i < GENERATION_CAP; i++)
+                this.nextGenerationGrid();
+        }
+
+        this.changePlayer();
+        this.numOfMoves = 0;
     }
 }
