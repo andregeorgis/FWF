@@ -15,7 +15,9 @@ export class GameState {
         this.numActiveCells = [0, 0];
         this.neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(y => [0, 0]));
         this.oldNeighbours = this.neighbourGrid.map(x => x.map(y => [...y]));
-        this.timeouts = Array.apply(null, Array)
+        this.timeouts = Array.apply(null, Array);
+        this.canClick = true;
+        this.stopClickTimeout = null;
     }
 
     // First part of handling "different stages" => equiv to "different modes"
@@ -59,8 +61,7 @@ export class GameState {
      * Cell and Grid State Functions
      */
     clickCell(cell) {
-        // We can now make the conditions stage specific here
-        if (!cell.isBlank() && cell.getPlayer() != this.getPlayer())
+        if (!this.canClick || (!cell.isBlank() && cell.getPlayer() != this.getPlayer()))
             return;
 
         var coords = cell.getCoord()
@@ -102,23 +103,27 @@ export class GameState {
             }
         }
 
-        console.log("Generation Done");
-        console.log(this.numActiveCells)
+        if (this.stageNum == STAGE_ONE)
+            return;
 
         // Check if we need to reset the game
-        var playerOneDead = this.numActiveCells[PLAYER_ONE] == 0;
-        var playerTwoDead = this.numActiveCells[PLAYER_TWO] == 0;
+        var playerOneDead = this.numActiveCells[PLAYER_ONE] == 0 ? 2 : 0;
+        var playerTwoDead = this.numActiveCells[PLAYER_TWO] == 0 ? 1 : 0;
+
+        switch (playerOneDead + playerTwoDead) {
+            case 1:
+                console.log("Player one wins!");
+                break;
+            case 2:
+                console.log("Player two wins!");
+                break;
+            case 3:
+                console.log("Draw!");
+                break;
+        }
 
         if (playerOneDead || playerTwoDead)
             this.resetGame();
-
-        if (playerOneDead && playerTwoDead) {
-            console.log("Draw");
-        } else if (playerTwoDead) {
-            console.log("Player one wins!");
-        } else if (playerOneDead) {
-            console.log("Player two wins!");
-        }
     }
 
     nextGenerationCell(row, col) {
@@ -164,6 +169,15 @@ export class GameState {
     /*
      * Game State Functions
      */
+    banClicking() {
+        this.canClick = false;
+    }
+
+    allowClicking() {
+        this.canClick = true;
+        this.stopClickTimeout = null;
+    }
+
     // Later we can add "history" functionality
     addMove() {
         this.numOfMoves++;
@@ -192,9 +206,11 @@ export class GameState {
             return;
 
         if (this.getPlayer() == PLAYER_TWO) {
+            this.banClicking();
             for (let i = 0; i < GENERATION_CAP; i++) {
                 this.timeouts[i] = setTimeout(this.nextGenerationGrid.bind(this), 2000 * (i + 1));
             }
+            this.stopClickTimeout = setTimeout(this.allowClicking.bind(this), 2000 * GENERATION_CAP);
         }
 
         this.changePlayer();
@@ -210,16 +226,22 @@ export class GameState {
      * Handling ending a game
      */
     resetGame() {
-        this.stopGenerationTimeouts();
+        this.stopTimeouts();
         setTimeout(this.clearGrid.bind(this), 5000);
+        this.stopClickTimeout = setTimeout(this.allowClicking.bind(this), 5000);
     }
 
-    stopGenerationTimeouts() {
+    stopTimeouts() {
         for (let i = 0; i < GENERATION_CAP; i++) {
             if (this.timeouts[i] != null)
                 clearTimeout(this.timeouts[i]);
 
             this.timeouts[i] = null;
+        }
+
+        if (this.stopClickTimeout != null) {
+            clearTimeout(this.stopClickTimeout)
+            this.stopClickTimeout = null;
         }
     }
 
