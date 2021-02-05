@@ -34,17 +34,17 @@ This stage is by far the easiest and most manageable with only a few requirement
 - Choosing your stage :white_check_mark:
   - First load buttons that ask for which stage :white_check_mark:
   - Depending on button pressed, load specific webpage (for stage 1 and for stage 2) :white_check_mark:
-- Rule Design
-  - We split the game into rounds that have two different stages, a Move Stage and a Wait Stage
-  - In the Move Stage players are allowed to click on the cell grid to "make moves" by activating or deactivating cells
-  - In the Wait Stage players wait for a fixed number of generations to occur
-  - The game is over when there is one player with at least one activated cell, and the other player with no activated cells
-  - In the case that both players "die" in the same generation, the game is declared a draw
-- Move Stage
-  - The first move stage will allow each player to activate 5<sup>YEET</sup> cells
-  - In every successive move stage, each player is allowed to either activate or deactivate 3<sup>YEET</sup> cells
-- Wait Stage
-  - Each wait stage will simulate 3<sup>YEET</sup> generations
+- Rule Design :white_check_mark:
+  - We split the game into rounds that have two different stages, a Move Stage and a Wait Stage :white_check_mark:
+  - In the Move Stage players are allowed to click on the cell grid to "make moves" by activating or deactivating cells :white_check_mark:
+  - In the Wait Stage players wait for a fixed number of generations to occur :white_check_mark:
+  - The game is over when there is one player with at least one activated cell, and the other player with no activated cells :white_check_mark:
+  - In the case that both players "die" in the same generation, the game is declared a draw :white_check_mark:
+- Move Stage :white_check_mark:
+  - The first move stage will allow each player to activate 5<sup>YEET</sup> cells :white_check_mark:
+  - In every successive move stage, each player is allowed to either activate or deactivate 3<sup>YEET</sup> cells :white_check_mark:
+- Wait Stage :white_check_mark:
+  - Each wait stage will simulate 3<sup>YEET</sup> generations :white_check_mark:
 
 
 
@@ -63,6 +63,7 @@ This stage is by far the easiest and most manageable with only a few requirement
 2. Toggles on the side
 3. Undo button
 4. Click and Drag
+5. Make visual queues better
 
 
 
