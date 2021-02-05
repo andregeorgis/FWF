@@ -22,5 +22,5 @@ function createFrontEndCell(row, col) {
     return cell;
 }
 
-game.config(STAGE_TWO)
+game.config(STAGE_TWO, document.getElementById("indicator"))
 createGrid(GRID_LENGTH, GRID_LENGTH);

@@ -22,7 +22,7 @@ function createFrontEndCell(row, col) {
     return cell;
 }
 
-game.config(STAGE_ONE)
+game.config(STAGE_ONE, null)
 createGrid(GRID_LENGTH, GRID_LENGTH);
 document.getElementById("next-player").addEventListener("click", nextPlayer);
 document.getElementById("next-generation").addEventListener("click", nextGeneration);

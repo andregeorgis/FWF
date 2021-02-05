@@ -1,5 +1,5 @@
 import { GRID_LENGTH, PLAYER_ONE, PLAYER_TWO, PLAYER_COLOURS, STAGE_ONE, STAGE_TWO, MOVE_CAP, GENERATION_CAP } from "./constants.js"
-import { PLAYER_ONE_FIRST, PLAYER_TWO_FIRST, PLAYER_ONE_SECOND, PLAYER_TWO_SECOND, PLAYER_ONE_THIRD, PLAYER_TWO_THIRD, NEXT_STATE } from "./constants.js"
+import { PLAYER_ONE_FIRST, PLAYER_TWO_FIRST, PLAYER_ONE_SECOND, PLAYER_TWO_SECOND, PLAYER_ONE_THIRD, PLAYER_TWO_THIRD, WAIT_STATE, NEXT_STATE, STATE_MESSAGE } from "./constants.js"
 import { Grid } from "./grid.js"
 import { Cell } from "./cell.js"
 
@@ -19,12 +19,16 @@ export class GameState {
         this.oldNeighbours = this.neighbourGrid.map(x => x.map(y => [...y]));
         this.timeouts = Array.apply(null, Array);
         this.canClick = true;
-        this.stopClickTimeout = null;
+        this.waitStageTimeout = null;
+        this.indicator;
     }
 
     // First part of handling "different stages" => equiv to "different modes"
-    config(stageNum) {
+    config(stageNum, indicator) {
         this.stage = stageNum;
+        this.indicator = indicator;
+        if (this.indicator != null)
+            this.indicator.innerHTML = STATE_MESSAGE[this.state];
     }
 
     createBackEndCell(row, col, cell) {
@@ -177,7 +181,7 @@ export class GameState {
 
     allowClicking() {
         this.canClick = true;
-        this.stopClickTimeout = null;
+        this.waitStageTimeout = null;
     }
 
     // Later we can add "history" functionality
@@ -207,17 +211,28 @@ export class GameState {
         if (this.numOfMoves != MOVE_CAP[this.state])
             return;
 
-        if (this.state == PLAYER_TWO_THIRD) {
+        this.changePlayer();
+        this.numOfMoves = 0;
+        this.updateState();
+
+        if (this.state == WAIT_STATE) {
             this.banClicking();
             for (let i = 0; i < GENERATION_CAP; i++) {
                 this.timeouts[i] = setTimeout(this.nextGenerationGrid.bind(this), 2000 * (i + 1));
             }
-            this.stopClickTimeout = setTimeout(this.allowClicking.bind(this), 2000 * GENERATION_CAP);
+            this.waitStageTimeout = setTimeout(this.finishWaitStage.bind(this), 2000 * GENERATION_CAP);
         }
+    }
 
-        this.changePlayer();
-        this.numOfMoves = 0;
+    finishWaitStage() {
+        this.allowClicking();
+        this.updateState();
+    }
+
+    updateState() {
         this.state = NEXT_STATE[this.state];
+        if (this.indicator != null)
+            this.indicator.innerHTML = STATE_MESSAGE[this.state];
     }
 
 
@@ -231,7 +246,7 @@ export class GameState {
     resetGame() {
         this.stopTimeouts();
         setTimeout(this.clearGrid.bind(this), 5000);
-        this.stopClickTimeout = setTimeout(this.allowClicking.bind(this), 5000);
+        this.waitStageTimeout = setTimeout(this.finishWaitStage.bind(this), 5000);
     }
 
     stopTimeouts() {
@@ -242,9 +257,9 @@ export class GameState {
             this.timeouts[i] = null;
         }
 
-        if (this.stopClickTimeout != null) {
-            clearTimeout(this.stopClickTimeout)
-            this.stopClickTimeout = null;
+        if (this.waitStageTimeout != null) {
+            clearTimeout(this.waitStageTimeout)
+            this.waitStageTimeout = null;
         }
     }
 

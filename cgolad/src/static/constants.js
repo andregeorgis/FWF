@@ -9,17 +9,25 @@ export var GRID_LENGTH = 10;
 
 // Colour Constants
 export var PLAYER_COLOURS = ["#E71D36", "#2EC4B6"];
-export var BLANK_COLOUR = "transparent";
+export var BLANK_COLOUR = "white";
 
 // Rule Constants
 export var MOVE_CAP = [2, 2, 2, 2, 1, 1];
 export var GENERATION_CAP = 3;
 
-// Move Stage States
+// Game States
 export var PLAYER_ONE_FIRST = 0;
 export var PLAYER_TWO_FIRST = 1;
 export var PLAYER_ONE_SECOND = 2;
 export var PLAYER_TWO_SECOND = 3;
 export var PLAYER_ONE_THIRD = 4;
 export var PLAYER_TWO_THIRD = 5;
-export var NEXT_STATE = [1, 2, 3, 4, 5, 0];
+export var WAIT_STATE = 6;
+export var NEXT_STATE = [1, 2, 3, 4, 5, 6, 0];
+export var STATE_MESSAGE = ["Move Stage: Player One Phase One",
+                            "Move Stage: Player Two Phase One",
+                            "Move Stage: Player One Phase Two",
+                            "Move Stage: Player Two Phase Two",
+                            "Move Stage: Player One Phase Three",
+                            "Move Stage: Player Two Phase Three",
+                            "Wait Stage"]
