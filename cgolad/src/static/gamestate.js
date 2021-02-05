@@ -1,4 +1,5 @@
 import { GRID_LENGTH, PLAYER_ONE, PLAYER_TWO, PLAYER_COLOURS, STAGE_ONE, STAGE_TWO, MOVE_CAP, GENERATION_CAP } from "./constants.js"
+import { PLAYER_ONE_FIRST, PLAYER_TWO_FIRST, PLAYER_ONE_SECOND, PLAYER_TWO_SECOND, PLAYER_ONE_THIRD, PLAYER_TWO_THIRD, NEXT_STATE } from "./constants.js"
 import { Grid } from "./grid.js"
 import { Cell } from "./cell.js"
 
@@ -11,6 +12,7 @@ export class GameState {
         this.colours = PLAYER_COLOURS;
         this.numOfMoves = 0;
         this.stage = -1;
+        this.state = PLAYER_ONE_FIRST;
         this.grid = new Grid();
         this.numActiveCells = [0, 0];
         this.neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(y => [0, 0]));
@@ -202,10 +204,10 @@ export class GameState {
     }
 
     stageTwoUpdate() {
-        if (this.numOfMoves != MOVE_CAP)
+        if (this.numOfMoves != MOVE_CAP[this.state])
             return;
 
-        if (this.getPlayer() == PLAYER_TWO) {
+        if (this.state == PLAYER_TWO_THIRD) {
             this.banClicking();
             for (let i = 0; i < GENERATION_CAP; i++) {
                 this.timeouts[i] = setTimeout(this.nextGenerationGrid.bind(this), 2000 * (i + 1));
@@ -215,6 +217,7 @@ export class GameState {
 
         this.changePlayer();
         this.numOfMoves = 0;
+        this.state = NEXT_STATE[this.state];
     }
 
 
