@@ -31,3 +31,10 @@ export var STATE_MESSAGE = ["Move Stage: Player One Phase One",
                             "Move Stage: Player One Phase Three",
                             "Move Stage: Player Two Phase Three",
                             "Wait Stage"]
+
+// End States
+export var NO_WINNER = 0;
+export var PLAYER_ONE_WINS = 1;
+export var PLAYER_TWO_WINS = 2;
+export var DRAW = 3;
+export var END_MESSAGE = ["", "Player One Wins!", "Player Two Wins!", "Draw!"];

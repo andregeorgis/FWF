@@ -1,5 +1,6 @@
 import { GRID_LENGTH, PLAYER_ONE, PLAYER_TWO, PLAYER_COLOURS, STAGE_ONE, STAGE_TWO, MOVE_CAP, GENERATION_CAP } from "./constants.js"
 import { PLAYER_ONE_FIRST, PLAYER_TWO_FIRST, PLAYER_ONE_SECOND, PLAYER_TWO_SECOND, PLAYER_ONE_THIRD, PLAYER_TWO_THIRD, WAIT_STATE, NEXT_STATE, STATE_MESSAGE } from "./constants.js"
+import { NO_WINNER, PLAYER_ONE_WINS, PLAYER_TWO_WINS, DRAW, END_MESSAGE } from "./constants.js"
 import { Grid } from "./grid.js"
 import { Cell } from "./cell.js"
 
@@ -115,21 +116,10 @@ export class GameState {
         // Check if we need to reset the game
         var playerOneDead = this.numActiveCells[PLAYER_ONE] == 0 ? 2 : 0;
         var playerTwoDead = this.numActiveCells[PLAYER_TWO] == 0 ? 1 : 0;
-
-        switch (playerOneDead + playerTwoDead) {
-            case 1:
-                console.log("Player one wins!");
-                break;
-            case 2:
-                console.log("Player two wins!");
-                break;
-            case 3:
-                console.log("Draw!");
-                break;
-        }
+        var return_val = playerOneDead + playerTwoDead;
 
         if (playerOneDead || playerTwoDead)
-            this.resetGame();
+            this.resetGame(return_val);
     }
 
     nextGenerationCell(row, col) {
@@ -243,7 +233,10 @@ export class GameState {
     /*
      * Handling ending a game
      */
-    resetGame() {
+    resetGame(end_state) {
+        if (this.indicator != null)
+            this.indicator.innerHTML = END_MESSAGE[end_state];
+
         this.stopTimeouts();
         setTimeout(this.clearGrid.bind(this), 5000);
         this.waitStageTimeout = setTimeout(this.finishWaitStage.bind(this), 5000);
