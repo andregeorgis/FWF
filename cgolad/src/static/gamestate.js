@@ -42,7 +42,9 @@ export class GameState {
         return this.colours[this.player];
     }
 
-
+    getSpecificColour(player) {
+        return this.colours[player];
+    }
 
 
     /*
@@ -107,7 +109,7 @@ export class GameState {
                 switch (totalNum) {
                     case 3:
                         this.updateNeighbour(row, col, winner, cell.isBlank() ? 1 : -1)
-                        cell.activate(winner, this.getPlayerColour());
+                        cell.activate(winner, this.getSpecificColour(winner));
                         break;
                 }
                 break;
@@ -156,8 +158,9 @@ export class GameState {
             return;
 
         if (this.getPlayer() == PLAYER_TWO) {
-            for (let i = 0; i < GENERATION_CAP; i++)
-                this.nextGenerationGrid();
+            for (let i = 0; i < GENERATION_CAP; i++) {
+                setTimeout(this.nextGenerationGrid.bind(this), 2000 * (i + 1));
+            }
         }
 
         this.changePlayer();
