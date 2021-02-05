@@ -12,8 +12,10 @@ export class GameState {
         this.numOfMoves = 0;
         this.stage = -1;
         this.grid = new Grid();
+        this.numActiveCells = [0, 0];
         this.neighbourGrid = Array.apply(null, Array(10)).map(x => Array.apply(null, Array(10)).map(y => [0, 0]));
         this.oldNeighbours = this.neighbourGrid.map(x => x.map(y => [...y]));
+        this.timeouts = Array.apply(null, Array)
     }
 
     // First part of handling "different stages" => equiv to "different modes"
@@ -24,6 +26,8 @@ export class GameState {
     createBackEndCell(row, col, cell) {
         this.grid.addCell(row, col, new Cell(cell));
     }
+
+
 
 
 
@@ -47,6 +51,10 @@ export class GameState {
     }
 
 
+
+
+
+
     /*
      * Cell and Grid State Functions
      */
@@ -61,9 +69,11 @@ export class GameState {
         switch (cell.isBlank()) {
             case true:
                 cell.activate(this.getPlayer(), this.getPlayerColour());
+                this.numActiveCells[this.getPlayer()]++;
                 break;
             case false:
                 cell.deactivate();
+                this.numActiveCells[this.getPlayer()]--;
                 break;
         }
 
@@ -91,6 +101,24 @@ export class GameState {
                 this.nextGenerationCell(i, j);
             }
         }
+
+        console.log("Generation Done");
+        console.log(this.numActiveCells)
+
+        // Check if we need to reset the game
+        var playerOneDead = this.numActiveCells[PLAYER_ONE] == 0;
+        var playerTwoDead = this.numActiveCells[PLAYER_TWO] == 0;
+
+        if (playerOneDead || playerTwoDead)
+            this.resetGame();
+
+        if (playerOneDead && playerTwoDead) {
+            console.log("Draw");
+        } else if (playerTwoDead) {
+            console.log("Player one wins!");
+        } else if (playerOneDead) {
+            console.log("Player two wins!");
+        }
     }
 
     nextGenerationCell(row, col) {
@@ -110,6 +138,7 @@ export class GameState {
                     case 3:
                         this.updateNeighbour(row, col, winner, cell.isBlank() ? 1 : -1)
                         cell.activate(winner, this.getSpecificColour(winner));
+                        this.numActiveCells[winner]++;
                         break;
                 }
                 break;
@@ -120,12 +149,17 @@ export class GameState {
                         break;
                     default:
                         this.updateNeighbour(row, col, cell.getPlayer(), cell.isBlank() ? 1 : -1);
+                        this.numActiveCells[cell.getPlayer()]--;
                         cell.deactivate();
                         break;
                 }
                 break;
         }
     }
+
+
+
+
 
     /*
      * Game State Functions
@@ -159,11 +193,47 @@ export class GameState {
 
         if (this.getPlayer() == PLAYER_TWO) {
             for (let i = 0; i < GENERATION_CAP; i++) {
-                setTimeout(this.nextGenerationGrid.bind(this), 2000 * (i + 1));
+                this.timeouts[i] = setTimeout(this.nextGenerationGrid.bind(this), 2000 * (i + 1));
             }
         }
 
         this.changePlayer();
         this.numOfMoves = 0;
+    }
+
+
+
+
+
+
+    /*
+     * Handling ending a game
+     */
+    resetGame() {
+        this.stopGenerationTimeouts();
+        setTimeout(this.clearGrid.bind(this), 5000);
+    }
+
+    stopGenerationTimeouts() {
+        for (let i = 0; i < GENERATION_CAP; i++) {
+            if (this.timeouts[i] != null)
+                clearTimeout(this.timeouts[i]);
+
+            this.timeouts[i] = null;
+        }
+    }
+
+    clearGrid() {
+        this.neighbourGrid = this.neighbourGrid.map(x => x.map(y => [0, 0]));
+
+        for (let i = 0; i < GRID_LENGTH; i++) {
+            for (let j = 0; j < GRID_LENGTH; j++) {
+                var currId = `i${i}_${j}`;
+                var cell = this.grid.getCell(currId);
+                cell.deactivate();
+            }
+        }
+
+        this.numActiveCells = [0, 0];
     }
 }
