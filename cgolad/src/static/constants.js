@@ -38,3 +38,7 @@ export var PLAYER_ONE_WINS = 1;
 export var PLAYER_TWO_WINS = 2;
 export var DRAW = 3;
 export var END_MESSAGE = ["", "Player One Wins!", "Player Two Wins!", "Draw!"];
+
+// Timeout Periods
+export var GENERATION_PERIOD = 2000;
+export var RESET_PERIOD = 5000;

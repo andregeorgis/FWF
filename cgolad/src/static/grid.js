@@ -43,6 +43,7 @@ export class Grid {
         return this.length;
     }
 
+    // Checks that a provided coord is within the grid dimensions
     isValidCoord(row, col) {
         return row >= 0 && row < this.length && col >= 0 && col < this.length;
     }

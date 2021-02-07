@@ -1,6 +1,7 @@
 import { game, selectCell, nextPlayer, nextGeneration } from "./event_bridge.js";
 import { GRID_LENGTH, STAGE_TWO } from "./constants.js"
 
+// Sets up the grid
 function createGrid(rows, cols) {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
@@ -11,9 +12,12 @@ function createGrid(rows, cols) {
     }
 }
 
+// Sets up the frontend of each cell
 function createFrontEndCell(row, col) {
-    // Frontend cell
+    // Grab cell from grid
     var gridContainer = document.getElementById("grid-container");
+
+    // Set up attributes
     var cell = document.createElement("div");
     cell.className = "cell";
     cell.id = `i${row}_${col}`;

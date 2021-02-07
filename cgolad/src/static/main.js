@@ -1,3 +1,4 @@
+// Buttons should redirect to the correct html page
 document.getElementById('stage-one').addEventListener('click', redirect);
 document.getElementById('stage-two').addEventListener('click', redirect);
 
